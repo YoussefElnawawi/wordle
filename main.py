@@ -15,22 +15,33 @@ def read_random_word():
 
 
 print_menu()
-word = read_random_word()
 
-for attempt in range(1, 7):
-    guess = input().lower()
+play_again = ""
+while play_again != "q":
+    word = read_random_word()
 
-    sys.stdout.write('\x1b[1A')
-    sys.stdout.write('\x1b[2K')
+    for attempt in range(1, 7):
+        guess = input().lower()
 
-    for i in range(min(len(guess), 5)):
-        if (guess[i] == word[i]):
-            print(colored(guess[i], 'green'), end="")
-        elif guess[i] in word:
-            print(colored(guess[i], 'yellow'), end="")
-        else:
-            print(guess[i], end="")
-    print()
-    if guess == word:
-        print(colored(f"Congrats! you got the wordle in: {attempt}", 'red'))
-        break
+        sys.stdout.write('\x1b[1A')
+        sys.stdout.write('\x1b[2K')
+
+        for i in range(min(len(guess), 5)):
+            if (guess[i] == word[i]):
+                print(colored(guess[i], 'green'), end="")
+            elif guess[i] in word:
+                print(colored(guess[i], 'yellow'), end="")
+            else:
+                print(guess[i], end="")
+        print()
+        if guess == word:
+            print(
+                colored(f"Congrats! you got the wordle in: {attempt}", 'red'))
+            break
+        elif attempt == 6:
+            print("Sorry the wordle was:" + word)
+    play_again = input("want to play again ? type Q to exit").lower()
+
+
+if (play_again == "q"):
+    print("Thank you for playing!")
