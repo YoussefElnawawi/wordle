@@ -37,6 +37,7 @@ while play_again != "q":
         if guess == word:
             print(
                 colored(f"Congrats! you got the wordle in: {attempt}", 'red'))
+            play_again = input("want to play again ? type Q to exit").lower()
             break
         elif attempt == 6:
             print("Sorry the wordle was:" + word)
